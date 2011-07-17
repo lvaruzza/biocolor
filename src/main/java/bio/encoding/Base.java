@@ -1,5 +1,7 @@
 package bio.encoding;
 
+import java.util.Random;
+
 /**
  * Created by IntelliJ IDEA.
  * User: varuzza
@@ -8,15 +10,22 @@ package bio.encoding;
  * To change this template use File | Settings | File Templates.
  */
 public class Base {
-    static public double[] equiProp = {0.25,0.25,0.25,0.25};
+
+    static byte[] num2base = {'A','C','G','T'};
 
     static public byte[] randomSequence(int size) {
-        return randomSequence(size,equiProp);
+        byte r[] = new byte[size];
+        Random generator = new Random();
+        generator.nextBytes(r);
+        for (int i =0;i<size;i++)
+            r[i] = (byte) num2base[Math.abs(r[i] % 4)];
+        return r;
     }
 
     static public byte randomBase(double [] p) {
-        return 'N';
+        throw new RuntimeException("Not Implemented: static public byte randomBase(double [] p)");
     }
+
 
     static public byte[] randomSequence(int size,double [] p) {
         byte r[] = new byte[size];

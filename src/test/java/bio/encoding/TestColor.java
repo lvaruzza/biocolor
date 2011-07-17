@@ -7,7 +7,7 @@ import static java.lang.System.out;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TestColorEncoding {
+public class TestColor {
 
 	private void doTestEncode(String a, String b) {
 		String r = new String(encode(a));
@@ -19,6 +19,14 @@ public class TestColorEncoding {
         String r = new String(decode(a));
         out.println(r);
         assertEquals(b,r);
+    }
+
+    private void doTestEncodeDecode(String a) {
+        byte[] e = encode(a);
+        out.flush();
+        String r = new String(decode(e));
+        out.println( a + "  => " + new String(e) + " => " + r);
+        assertEquals(a, r);
     }
 
 
@@ -41,4 +49,19 @@ public class TestColorEncoding {
         doTestDecode("T131","TGCA");
     }
 
+    @Test
+    public void testEncodeDecode() {
+        out.println("Testing Encode and Decode");
+        doTestEncodeDecode("CGAGCAGCGAGCA");
+        doTestEncodeDecode("TA");
+        doTestEncodeDecode("AA");
+        doTestEncodeDecode("GGGGGGGG");
+    }
+
+    @Test
+    public void testEncodeDecodeRandom() {
+        for(int i=0;i<10;i++) {
+            doTestEncodeDecode(new String(Base.randomSequence(50)));
+        }
+    }
 }

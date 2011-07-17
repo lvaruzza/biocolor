@@ -12,7 +12,11 @@ public class Color {
 	public static byte[] encode(byte [] s, int len) {
 		return encode(s,0,len);
 	}
-	
+
+    public static byte[] encode(byte [] s) {
+        return encode(s,0,s.length);
+    }
+
 	public static byte[] encode(byte [] s,int start, int len) {
 		byte[] r = new byte[len];
 		
@@ -32,6 +36,10 @@ public class Color {
 
     public static byte[] decode(byte [] s, int len) {
         return decode(s,0,len);
+    }
+
+    public static byte[] decode(byte [] s) {
+        return decode(s,0,s.length);
     }
 
     public static byte[] decode(byte [] s,int start, int len) {
