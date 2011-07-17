@@ -1,7 +1,7 @@
-package com.lifetech.solid.encoding;
+package bio.encoding;
 
-import static com.lifetech.solid.encoding.Color.decode;
-import static com.lifetech.solid.encoding.Color.encode;
+import static bio.encoding.Color.decode;
+import static bio.encoding.Color.encode;
 import static java.lang.System.out;
 
 import org.junit.Test;

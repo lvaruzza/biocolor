@@ -1,4 +1,4 @@
-package com.lifetech.solid.encoding;
+package bio.encoding;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +24,7 @@ public class Base {
         for(int i=0;i<size;i++) {
             r[i] = randomBase(p);
         }
+        return r;
     }
 
 }

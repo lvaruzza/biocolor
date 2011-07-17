@@ -1,4 +1,4 @@
-package com.lifetech.solid.encoding;
+package bio.encoding;
 
 import java.util.Arrays;
 
