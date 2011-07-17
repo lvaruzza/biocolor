@@ -1,9 +1,9 @@
-package com.lifetech.solid.color;
+package com.lifetech.solid.encoding;
 
 import java.util.Arrays;
-import static java.lang.System.out;
 
-public class ColorEncoding {
+public class Color {
+
 	public static byte[] encode(String s) {
 		byte [] b = s.getBytes();
 		return encode(b,b.length);
@@ -23,7 +23,28 @@ public class ColorEncoding {
 		
 		return r;
 	}
-	
+
+
+    public static byte[] decode(String s) {
+        byte [] b = s.getBytes();
+        return decode(b,b.length);
+    }
+
+    public static byte[] decode(byte [] s, int len) {
+        return decode(s,0,len);
+    }
+
+    public static byte[] decode(byte [] s,int start, int len) {
+        byte[] r = new byte[len];
+
+        r[0] = s[start];
+        for(int i=start+1,j=1;i<start+len;i++,j++) {
+            r[j] = decodeBase(r[j-1],s[i]);
+        }
+
+        return r;
+    }
+
 	private static byte[] v;
 	
 	static {
@@ -47,8 +68,22 @@ public class ColorEncoding {
 		/* T */    { '3','2','1','0', '4'},
 		/* N */    { '4','4','4','4', '4'}		 
 	};
-	
+
+    private static byte[][] dec = {
+                  /*  0   1   2   3    4   */
+        /* A */    { 'A','C','G','T', 'N'},
+        /* C */    { 'C','A','T','G', 'N'},
+        /* G */    { 'G','T','A','C', 'N'},
+        /* T */    { 'T','G','C','A', 'N'},
+        /* N */    { 'N','N','N','N', 'N'}
+    };
+
+
 	private static byte encodeBase(byte a, byte b) {
 		return enc[v[a]][v[b]];
 	}
+
+    private static byte decodeBase(byte a, byte b) {
+        return dec[v[a]][b-'0'];
+    }
 }
